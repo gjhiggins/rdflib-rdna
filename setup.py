@@ -9,7 +9,7 @@ from setuptools import find_packages, setup
 kwargs = {}
 kwargs["install_requires"] = [
     "setuptools",
-    "rdflib>=6.0",
+    "rdflib>=7.0",
     "importlib-metadata; python_version < '3.8.0'",
 ]
 kwargs["tests_require"] = [
