@@ -9,7 +9,7 @@ Contributed by Graham Higgins, translated from the [Digital Bazaar URDNA2015 Jav
 This plugin provides an NQuads serializer (labelled as “rdna”) which implements an algorithm for generating a normalized RDF dataset given an RDF dataset as input.
 
 BNode identifiers in the input Dataset are replaced by sequential, deterministic BNode identifiers using a `C14n` prefix, e.g.
-```py
+```
 _:c14n0 <http://xmlns.com/foaf/0.1/name> "Harry" _:c14n1 .
 ```
 
