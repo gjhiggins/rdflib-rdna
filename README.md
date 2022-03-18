@@ -1,6 +1,8 @@
 # A RDFLib plugin providing RDF Dataset Normalization
 
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) [![Validation: install and test](https://github.com/gjhiggins/rdflib-rdna/actions/workflows/validate.yaml/badge.svg)](https://github.com/gjhiggins/rdflib-rdna/actions/workflows/validate.yaml) [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) [![activity](https://img.shields.io/github/commit-activity/m/gjhiggins/rdflib-rdna)](https://github.com/gjhiggins/rdflib-rdna/pulse) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rdflib) [![semver](https://img.shields.io/badge/semver-1.0.0--alpha-blue)](https://semver.org/) [![Total alerts](https://img.shields.io/lgtm/alerts/g/gjhiggins/rdflib-rdna.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/gjhiggins/rdflib-rdna/alerts/)
+## **NOTE: This plugin will only work with RDFLib >= 7.0**
+
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) [![Validation: install and test](https://github.com/gjhiggins/rdflib-rdna/actions/workflows/validate.yaml/badge.svg)](https://github.com/gjhiggins/rdflib-rdna/actions/workflows/validate.yaml) [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) [![activity](https://img.shields.io/github/commit-activity/m/gjhiggins/rdflib-rdna)](https://github.com/gjhiggins/rdflib-rdna/pulse) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rdflib) [![semver](https://img.shields.io/badge/semver-1.0.0--alpha-blue)](https://semver.org/)
 
 Contributed by Graham Higgins, translated from the [Digital Bazaar URDNA2015 Javascript](https://github.com/digitalbazaar/rdf-canonize) implementation.
 
