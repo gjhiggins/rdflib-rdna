@@ -1,0 +1,469 @@
+## RDF Dataset Normalization tests
+## Distributed under both the W3C Test Suite License[1] and the W3C 3-
+## clause BSD License[2]. To contribute to a W3C Test Suite, see the
+## policies and contribution forms [3]
+##
+## 1. http://www.w3.org/Consortium/Legal/2008/04-testsuite-license
+## 2. http://www.w3.org/Consortium/Legal/2008/03-bsd-license
+## 3. http://www.w3.org/2004/10/27-testcases
+##
+## Test types
+## * rdfn:RdnaEvalTest  - Normalization using RDNA
+
+@prefix : <manifest-rdna#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix mf:   <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix rdft: <http://www.w3.org/ns/rdftest#> .
+@prefix rdfn: <http://json-ld.github.io/normalization/test-vocab#> .
+
+<manifest-rdna>  a mf:Manifest ;
+
+  rdfs:label "RDF Dataset Normalization (RDNA)";
+  rdfs:comment "Tests the RDF Dataset Normalization Algorithm.";
+  mf:entries (
+    # :test001 
+    :test002 :test003 :test004 :test005 :test006 :test007 :test008 :test009 :test010
+    :test011 :test012 :test013 :test014 
+    :test015
+    :test016 :test017 :test018 :test019 :test020
+    :test021 :test022 :test023 :test024 :test025 :test026 :test027 :test028 :test029 :test030
+    :test031 :test032 :test033 :test034 :test035 :test036 :test037 :test038 :test039 :test040
+    :test041 :test042 :test043 :test044 :test045 :test046 :test047 :test048 :test049 :test050
+    :test051 :test052 :test053 :test054 :test055 :test056 :test057 :test058 :test059 :test060
+    :test061 :test062
+  ) .
+
+# :test001 a rdfn:RdnaEvalTest;
+#   mf:name "simple id";
+#   rdft:approval rdft:Proposed;
+#   mf:action <test001-in.nq>;
+#   mf:result <test001-rdna.nq>;
+#   .
+
+:test002 a rdfn:RdnaEvalTest;
+  mf:name "duplicate property iri values";
+  rdft:approval rdft:Proposed;
+  mf:action <test002-in.nq>;
+  mf:result <test002-rdna.nq>;
+  .
+
+:test003 a rdfn:RdnaEvalTest;
+  mf:name "bnode";
+  rdft:approval rdft:Proposed;
+  mf:action <test003-in.nq>;
+  mf:result <test003-rdna.nq>;
+  .
+
+:test004 a rdfn:RdnaEvalTest;
+  mf:name "bnode plus embed w/subject";
+  rdft:approval rdft:Proposed;
+  mf:action <test004-in.nq>;
+  mf:result <test004-rdna.nq>;
+  .
+
+:test005 a rdfn:RdnaEvalTest;
+  mf:name "bnode embed";
+  rdft:approval rdft:Proposed;
+  mf:action <test005-in.nq>;
+  mf:result <test005-rdna.nq>;
+  .
+
+:test006 a rdfn:RdnaEvalTest;
+  mf:name "multiple rdf types";
+  rdft:approval rdft:Proposed;
+  mf:action <test006-in.nq>;
+  mf:result <test006-rdna.nq>;
+  .
+
+:test007 a rdfn:RdnaEvalTest;
+  mf:name "coerce CURIE value";
+  rdft:approval rdft:Proposed;
+  mf:action <test007-in.nq>;
+  mf:result <test007-rdna.nq>;
+  .
+
+:test008 a rdfn:RdnaEvalTest;
+  mf:name "single subject complex";
+  rdft:approval rdft:Proposed;
+  mf:action <test008-in.nq>;
+  mf:result <test008-rdna.nq>;
+  .
+
+:test009 a rdfn:RdnaEvalTest;
+  mf:name "multiple subjects - complex";
+  rdft:approval rdft:Proposed;
+  mf:action <test009-in.nq>;
+  mf:result <test009-rdna.nq>;
+  .
+
+:test010 a rdfn:RdnaEvalTest;
+  mf:name "type";
+  rdft:approval rdft:Proposed;
+  mf:action <test010-in.nq>;
+  mf:result <test010-rdna.nq>;
+  .
+
+:test011 a rdfn:RdnaEvalTest;
+  mf:name "type-coerced type";
+  rdft:approval rdft:Proposed;
+  mf:action <test011-in.nq>;
+  mf:result <test011-rdna.nq>;
+  .
+
+:test012 a rdfn:RdnaEvalTest;
+  mf:name "type-coerced type, remove duplicate reference";
+  rdft:approval rdft:Proposed;
+  mf:action <test012-in.nq>;
+  mf:result <test012-rdna.nq>;
+  .
+
+:test013 a rdfn:RdnaEvalTest;
+  mf:name "type-coerced type, cycle";
+  rdft:approval rdft:Proposed;
+  mf:action <test013-in.nq>;
+  mf:result <test013-rdna.nq>;
+  .
+
+:test014 a rdfn:RdnaEvalTest;
+  mf:name "check types";
+  rdft:approval rdft:Proposed;
+  mf:action <test014-in.nq>;
+  mf:result <test014-rdna.nq>;
+  .
+
+:test015 a rdfn:RdnaEvalTest;
+  mf:name "top level context";
+  rdft:approval rdft:Proposed;
+  mf:action <test015-in.nq>;
+  mf:result <test015-rdna.nq>;
+  .
+
+:test016 a rdfn:RdnaEvalTest;
+  mf:name "blank node - dual link - embed";
+  rdft:approval rdft:Proposed;
+  mf:action <test016-in.nq>;
+  mf:result <test016-rdna.nq>;
+  .
+
+:test017 a rdfn:RdnaEvalTest;
+  mf:name "blank node - dual link - non-embed";
+  rdft:approval rdft:Proposed;
+  mf:action <test017-in.nq>;
+  mf:result <test017-rdna.nq>;
+  .
+
+:test018 a rdfn:RdnaEvalTest;
+  mf:name "blank node - self link";
+  rdft:approval rdft:Proposed;
+  mf:action <test018-in.nq>;
+  mf:result <test018-rdna.nq>;
+  .
+
+:test019 a rdfn:RdnaEvalTest;
+  mf:name "blank node - disjoint self links";
+  rdft:approval rdft:Proposed;
+  mf:action <test019-in.nq>;
+  mf:result <test019-rdna.nq>;
+  .
+
+:test020 a rdfn:RdnaEvalTest;
+  mf:name "blank node - diamond";
+  rdft:approval rdft:Proposed;
+  mf:action <test020-in.nq>;
+  mf:result <test020-rdna.nq>;
+  .
+
+:test021 a rdfn:RdnaEvalTest;
+  mf:name "blank node - circle of 2";
+  rdft:approval rdft:Proposed;
+  mf:action <test021-in.nq>;
+  mf:result <test021-rdna.nq>;
+  .
+
+:test022 a rdfn:RdnaEvalTest;
+  mf:name "blank node - double circle of 2";
+  rdft:approval rdft:Proposed;
+  mf:action <test022-in.nq>;
+  mf:result <test022-rdna.nq>;
+  .
+
+:test023 a rdfn:RdnaEvalTest;
+  mf:name "blank node - circle of 3";
+  rdft:approval rdft:Proposed;
+  mf:action <test023-in.nq>;
+  mf:result <test023-rdna.nq>;
+  .
+
+:test024 a rdfn:RdnaEvalTest;
+  mf:name "blank node - double circle of 3 (1-2-3)";
+  rdft:approval rdft:Proposed;
+  mf:action <test024-in.nq>;
+  mf:result <test024-rdna.nq>;
+  .
+
+:test025 a rdfn:RdnaEvalTest;
+  mf:name "blank node - double circle of 3 (1-3-2)";
+  rdft:approval rdft:Proposed;
+  mf:action <test025-in.nq>;
+  mf:result <test025-rdna.nq>;
+  .
+
+:test026 a rdfn:RdnaEvalTest;
+  mf:name "blank node - double circle of 3 (2-1-3)";
+  rdft:approval rdft:Proposed;
+  mf:action <test026-in.nq>;
+  mf:result <test026-rdna.nq>;
+  .
+
+:test027 a rdfn:RdnaEvalTest;
+  mf:name "blank node - double circle of 3 (2-3-1)";
+  rdft:approval rdft:Proposed;
+  mf:action <test027-in.nq>;
+  mf:result <test027-rdna.nq>;
+  .
+
+:test028 a rdfn:RdnaEvalTest;
+  mf:name "blank node - double circle of 3 (3-2-1)";
+  rdft:approval rdft:Proposed;
+  mf:action <test028-in.nq>;
+  mf:result <test028-rdna.nq>;
+  .
+
+:test029 a rdfn:RdnaEvalTest;
+  mf:name "blank node - double circle of 3 (3-1-2)";
+  rdft:approval rdft:Proposed;
+  mf:action <test029-in.nq>;
+  mf:result <test029-rdna.nq>;
+  .
+
+:test030 a rdfn:RdnaEvalTest;
+  mf:name "blank node - point at circle of 3";
+  rdft:approval rdft:Proposed;
+  mf:action <test030-in.nq>;
+  mf:result <test030-rdna.nq>;
+  .
+
+:test031 a rdfn:RdnaEvalTest;
+  mf:name "bnode (1)";
+  rdft:approval rdft:Proposed;
+  mf:action <test031-in.nq>;
+  mf:result <test031-rdna.nq>;
+  .
+
+:test032 a rdfn:RdnaEvalTest;
+  mf:name "bnode (2)";
+  rdft:approval rdft:Proposed;
+  mf:action <test032-in.nq>;
+  mf:result <test032-rdna.nq>;
+  .
+
+:test033 a rdfn:RdnaEvalTest;
+  mf:name "disjoint identical subgraphs (1)";
+  rdft:approval rdft:Proposed;
+  mf:action <test033-in.nq>;
+  mf:result <test033-rdna.nq>;
+  .
+
+:test034 a rdfn:RdnaEvalTest;
+  mf:name "disjoint identical subgraphs (2)";
+  rdft:approval rdft:Proposed;
+  mf:action <test034-in.nq>;
+  mf:result <test034-rdna.nq>;
+  .
+
+:test035 a rdfn:RdnaEvalTest;
+  mf:name "reordered w/strings (1)";
+  rdft:approval rdft:Proposed;
+  mf:action <test035-in.nq>;
+  mf:result <test035-rdna.nq>;
+  .
+
+:test036 a rdfn:RdnaEvalTest;
+  mf:name "reordered w/strings (2)";
+  rdft:approval rdft:Proposed;
+  mf:action <test036-in.nq>;
+  mf:result <test036-rdna.nq>;
+  .
+
+:test037 a rdfn:RdnaEvalTest;
+  mf:name "reordered w/strings (3)";
+  rdft:approval rdft:Proposed;
+  mf:action <test037-in.nq>;
+  mf:result <test037-rdna.nq>;
+  .
+
+:test038 a rdfn:RdnaEvalTest;
+  mf:name "reordered 4 bnodes, reordered 2 properties (1)";
+  rdft:approval rdft:Proposed;
+  mf:action <test038-in.nq>;
+  mf:result <test038-rdna.nq>;
+  .
+
+:test039 a rdfn:RdnaEvalTest;
+  mf:name "reordered 4 bnodes, reordered 2 properties (2)";
+  rdft:approval rdft:Proposed;
+  mf:action <test039-in.nq>;
+  mf:result <test039-rdna.nq>;
+  .
+
+:test040 a rdfn:RdnaEvalTest;
+  mf:name "reordered 6 bnodes (1)";
+  rdft:approval rdft:Proposed;
+  mf:action <test040-in.nq>;
+  mf:result <test040-rdna.nq>;
+  .
+
+:test041 a rdfn:RdnaEvalTest;
+  mf:name "reordered 6 bnodes (2)";
+  rdft:approval rdft:Proposed;
+  mf:action <test041-in.nq>;
+  mf:result <test041-rdna.nq>;
+  .
+
+:test042 a rdfn:RdnaEvalTest;
+  mf:name "reordered 6 bnodes (3)";
+  rdft:approval rdft:Proposed;
+  mf:action <test042-in.nq>;
+  mf:result <test042-rdna.nq>;
+  .
+
+:test043 a rdfn:RdnaEvalTest;
+  mf:name "literal with language";
+  rdft:approval rdft:Proposed;
+  mf:action <test043-in.nq>;
+  mf:result <test043-rdna.nq>;
+  .
+
+:test044 a rdfn:RdnaEvalTest;
+  mf:name "evil (1)";
+  rdft:approval rdft:Proposed;
+  mf:action <test044-in.nq>;
+  mf:result <test044-rdna.nq>;
+  .
+
+:test045 a rdfn:RdnaEvalTest;
+  mf:name "evil (2)";
+  rdft:approval rdft:Proposed;
+  mf:action <test045-in.nq>;
+  mf:result <test045-rdna.nq>;
+  .
+
+:test046 a rdfn:RdnaEvalTest;
+  mf:name "evil (3)";
+  rdft:approval rdft:Proposed;
+  mf:action <test046-in.nq>;
+  mf:result <test046-rdna.nq>;
+  .
+
+:test047 a rdfn:RdnaEvalTest;
+  mf:name "deep diff (1)";
+  rdft:approval rdft:Proposed;
+  mf:action <test047-in.nq>;
+  mf:result <test047-rdna.nq>;
+  .
+
+:test048 a rdfn:RdnaEvalTest;
+  mf:name "deep diff (2)";
+  rdft:approval rdft:Proposed;
+  mf:action <test048-in.nq>;
+  mf:result <test048-rdna.nq>;
+  .
+
+:test049 a rdfn:RdnaEvalTest;
+  mf:name "remove null";
+  rdft:approval rdft:Proposed;
+  mf:action <test049-in.nq>;
+  mf:result <test049-rdna.nq>;
+  .
+
+:test050 a rdfn:RdnaEvalTest;
+  mf:name "nulls";
+  rdft:approval rdft:Proposed;
+  mf:action <test050-in.nq>;
+  mf:result <test050-rdna.nq>;
+  .
+
+:test051 a rdfn:RdnaEvalTest;
+  mf:name "merging subjects";
+  rdft:approval rdft:Proposed;
+  mf:action <test051-in.nq>;
+  mf:result <test051-rdna.nq>;
+  .
+
+:test052 a rdfn:RdnaEvalTest;
+  mf:name "alias keywords";
+  rdft:approval rdft:Proposed;
+  mf:action <test052-in.nq>;
+  mf:result <test052-rdna.nq>;
+  .
+
+:test053 a rdfn:RdnaEvalTest;
+  mf:name "@list";
+  rdft:approval rdft:Proposed;
+  mf:action <test053-in.nq>;
+  mf:result <test053-rdna.nq>;
+  .
+
+:test054 a rdfn:RdnaEvalTest;
+  mf:name "t-graph";
+  rdft:approval rdft:Proposed;
+  mf:action <test054-in.nq>;
+  mf:result <test054-rdna.nq>;
+  .
+
+:test055 a rdfn:RdnaEvalTest;
+  mf:name "simple reorder (1)";
+  rdft:approval rdft:Proposed;
+  mf:action <test055-in.nq>;
+  mf:result <test055-rdna.nq>;
+  .
+
+:test056 a rdfn:RdnaEvalTest;
+  mf:name "simple reorder (2)";
+  rdft:approval rdft:Proposed;
+  mf:action <test056-in.nq>;
+  mf:result <test056-rdna.nq>;
+  .
+
+:test057 a rdfn:RdnaEvalTest;
+  mf:name "unnamed graph";
+  rdft:approval rdft:Proposed;
+  mf:action <test057-in.nq>;
+  mf:result <test057-rdna.nq>;
+  .
+
+:test058 a rdfn:RdnaEvalTest;
+  mf:name "unnamed graph with blank node objects";
+  rdft:approval rdft:Proposed;
+  mf:action <test058-in.nq>;
+  mf:result <test058-rdna.nq>;
+  .
+
+:test059 a rdfn:RdnaEvalTest;
+  mf:name "n-quads parsing";
+  rdft:approval rdft:Proposed;
+  mf:action <test059-in.nq>;
+  mf:result <test059-rdna.nq>;
+  .
+
+:test060 a rdfn:RdnaEvalTest;
+  mf:name "n-quads escaping";
+  rdft:approval rdft:Proposed;
+  mf:action <test060-in.nq>;
+  mf:result <test060-rdna.nq>;
+  .
+
+:test061 a rdfn:RdnaEvalTest;
+  mf:name "same literal value with multiple languages";
+  rdft:approval rdft:Proposed;
+  mf:action <test061-in.nq>;
+  mf:result <test061-rdna.nq>;
+  .
+
+:test062 a rdfn:RdnaEvalTest;
+  mf:name "same literal value with multiple datatypes";
+  rdft:approval rdft:Proposed;
+  mf:action <test062-in.nq>;
+  mf:result <test062-rdna.nq>;
+  .

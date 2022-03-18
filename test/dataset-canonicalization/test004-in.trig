@@ -1,0 +1,5 @@
+
+{
+	_:genid-bf0be3852c6c4e6181c27743058d5ab8-b0 a <http://example.org/vocab#Foo> ;
+		<http://example.org/vocab#embed> <http://example.org/test#example> .
+}

@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=40.6.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# Not necessary for packaging but every self-respecting Python
+# package should a) use black and b) fix the WRONG default.
+[tool.black]
+# WARNING: This should be the same as in `.pre-commit-config.yaml`.
+required-version = "22.1.0"
+line-length = "88"
+skip-string-normalization = true
+target-version = ['py37']
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.pytest_cache
+    | \.tox
+    | \.venv
+    | \.github
+    | _build
+    | htmlcov
+    | benchmarks
+    | examples       # No need to Black examples
+    | test           # Tests are a mess, don't black them
+    | test_reports
+    | rdflib.egg-info
+    | buck-out
+    | build
+    | dist
+    | venv
+  )/
+)
+'''

@@ -1,0 +1,10 @@
+<http://example.org/alice> <http://purl.org/dc/terms/publisher> "Alice" .
+<http://example.org/bob> <http://purl.org/dc/terms/publisher> "Bob" .
+_:c14n0 <http://xmlns.com/foaf/0.1/mbox> <mailto:alice@work.example.org> <http://example.org/alice> .
+_:c14n0 <http://xmlns.com/foaf/0.1/name> "Alice" <http://example.org/alice> .
+_:c14n1 <http://xmlns.com/foaf/0.1/mbox> <mailto:harry@work.example.org> _:c14n3 .
+_:c14n1 <http://xmlns.com/foaf/0.1/name> "Harry" _:c14n3 .
+_:c14n2 <http://xmlns.com/foaf/0.1/knows> _:c14n0 <http://example.org/bob> .
+_:c14n2 <http://xmlns.com/foaf/0.1/mbox> <mailto:bob@oldcorp.example.org> <http://example.org/bob> .
+_:c14n2 <http://xmlns.com/foaf/0.1/name> "Bob" <http://example.org/bob> .
+_:c14n3 <http://purl.org/dc/terms/publisher> "Harry" .
