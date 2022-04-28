@@ -24,7 +24,7 @@ from typing import (
 
 from rdflib import RDF, XSD, logger
 from rdflib.compat import decodeUnicodeEscape
-from rdflib.graph import Dataset, QuotedGraph
+from rdflib.graph import Dataset, Graph, QuotedGraph
 from rdflib.paths import Path
 from rdflib.plugins.serializers.nt import _quoteLiteral
 from rdflib.serializer import Serializer
@@ -44,12 +44,10 @@ DatasetQuad = Tuple[Subject, Predicate, Object, Optional[ContextNode]]
 __all__ = ["RDNASerializer", "IdentifierIssuer"]
 
 
-DATASET_DEFAULT_GRAPH_ID = URIRef("urn:x-rdflib:default")
-
-
 class RDNASerializer(Serializer):
-    def __init__(self, dataset) -> None:
+    def __init__(self, dataset: Union[Dataset, Graph]) -> None:
         self.dataset = dataset
+        self.context_aware = isinstance(dataset, Dataset)
 
         Serializer.__init__(self, dataset)
 
@@ -58,9 +56,13 @@ class RDNASerializer(Serializer):
         stream: IO[bytes],
         base: Optional[str] = None,
         encoding: Optional[str] = "utf-8",
-        **kwargs,
-    ):
-        stream.write(RDNA().normalize(self.dataset).encode("utf-8"))
+        **kwargs: Dict[Any, Any],
+    ) -> None:
+        stream.write(
+            RDNA(context_aware=isinstance(self.dataset, Dataset))
+            .normalize(self.dataset)
+            .encode("utf-8")
+        )
 
 
 class IdentifierIssuer:
@@ -186,12 +188,14 @@ class MessageDigest:
 
 
 class RDNA:
-    def __init__(self) -> None:
+    def __init__(self, context_aware: bool = True) -> None:
         self.blank_node_info: "OrderedDict[str, typing.Dict[Any, Any]]" = OrderedDict()
         self.canonical_issuer = IdentifierIssuer("_:c14n")
         self.hash_algorithm: _HashT = hashlib.sha256
         self.quads: List[Any] = []
         self.hash_to_blank_nodes: "Dict[str, List[Any]]" = dict()
+        self.identifier: Any = None
+        self.context_aware: bool = context_aware
 
     def __use_canonical_id(self, x: Any) -> Any:
         return (
@@ -202,9 +206,10 @@ class RDNA:
         )
 
     # 4.4) Normalization Algorithm
-    def normalize(self, dataset: Dataset) -> str:
+    def normalize(self, dataset: Union[Dataset, Graph]) -> str:
         # Stash the dataset quads
         self.quads = sorted(list(dataset))
+        self.identifier = dataset.identifier
 
         # 1) Create the normalization state.
         # 2) For every quad in input dataset:
@@ -338,8 +343,9 @@ class RDNA:
         quads = list(self.quads)
 
         # Model the triples of a context-unaware Graph as quads in a Dataset default graph
-        if len(quads[0]) == 3:
-            quads = [(s, p, o, DATASET_DEFAULT_GRAPH_ID) for (s, p, o) in quads]
+        # if len(quads[0]) == 3:
+        if not self.context_aware:
+            quads = [(s, p, o, self.identifier) for (s, p, o) in quads]
 
         for (s, p, o, g) in quads:
             # 7.2) Add quad copy to the normalized dataset.
@@ -354,7 +360,9 @@ class RDNA:
                         p,
                         self.__use_canonical_id(o),
                         self.__use_canonical_id(g),
-                    )
+                    ),
+                    self.context_aware,
+                    self.identifier,
                 )
             )
 
@@ -402,7 +410,9 @@ class RDNA:
                             modify_first_degree_component(_id, component)
                             for component in quad
                         ]
-                    )
+                    ),
+                    self.context_aware,
+                    self.identifier,
                 )
             )
 
@@ -647,19 +657,19 @@ class RDNA:
 
         return md.digest(), issuer
 
-    def __serialize_nquad(self, quad: DatasetQuad) -> str:
+    def __serialize_nquad(
+        self, quad: DatasetQuad, context_aware: bool, identifier: Any
+    ) -> str:
         """
         * Converts an RDF quad to an N-Quad string (a single quad).
         *
-        * @param quad the RDF quad convert.
+        * @param quad the RDF quad to convert.
         *
         * @return the N-Quad string.
         """
 
-        # Model the triples of a context-unaware Graph as quads in a Dataset default graph
-        if len(quad) == 3:
-            s, p, o = quad
-            g = DATASET_DEFAULT_GRAPH_ID
+        if not context_aware and len(quad) == 3:
+            s, p, o = quad  # type: ignore[misc]
         else:
             s, p, o, g = quad
 
@@ -676,14 +686,16 @@ class RDNA:
         else:
             nquad += o
 
-        # graph can only be NamedNode or BlankNode (or DefaultGraph, but that
-        # does not add to `nquad`)
+        if context_aware:
 
-        if isinstance(g, URIRef):
-            nquad += f" {g.n3()}"
+            # graph can only be NamedNode or BlankNode (or DefaultGraph, but that
+            # does not add to `nquad`)
 
-        elif isinstance(g, str) and g.startswith(self.canonical_issuer.prefix):
-            nquad += f" {g}"
+            if isinstance(g, URIRef):
+                nquad += f" {g.n3()}"
+
+            elif isinstance(g, str) and g.startswith(self.canonical_issuer.prefix):
+                nquad += f" {g}"
 
         nquad += " .\n"
         return nquad
