@@ -1,1 +1,2 @@
-rdflib>=7.0
+# rdflib>=7.0
+-e git+https://github.com/gjhiggins/rdflib.git@dataset-and-identifier-as-context#egg=rdflib
