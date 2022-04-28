@@ -9,7 +9,8 @@ from setuptools import find_packages, setup
 kwargs = {}
 kwargs["install_requires"] = [
     "setuptools",
-    "rdflib>=7.0",
+    # "rdflib>=7.0",
+    "rdflib @ git+https://github.com/gjhiggins/rdflib.git@dataset-and-identifier-as-context#egg=rdflib",
     "importlib-metadata; python_version < '3.8.0'",
 ]
 kwargs["tests_require"] = [
