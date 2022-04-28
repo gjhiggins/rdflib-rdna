@@ -44,6 +44,9 @@ DatasetQuad = Tuple[Subject, Predicate, Object, Optional[ContextNode]]
 __all__ = ["RDNASerializer", "IdentifierIssuer"]
 
 
+DATASET_DEFAULT_GRAPH_ID = URIRef("urn:x-rdflib:default")
+
+
 class RDNASerializer(Serializer):
     def __init__(self, dataset) -> None:
         self.dataset = dataset
@@ -331,8 +334,19 @@ class RDNA:
         # blank node identifiers using the canonical identifiers
         # previously issued by canonical issuer.
         normalized = []
-        for (s, p, o, g) in self.quads:
+
+        quads = list(self.quads)
+
+        # Model the triples of a context-unaware Graph as quads in a Dataset default graph
+        if len(quads[0]) == 3:
+            quads = [(s, p, o, DATASET_DEFAULT_GRAPH_ID) for (s, p, o) in quads]
+
+        for (s, p, o, g) in quads:
             # 7.2) Add quad copy to the normalized dataset.
+
+            if any(isinstance(element, QuotedGraph) for element in [s, p, o]):
+                raise Exception("RDNA cannot serialize Graphs that contain Formulae")
+
             normalized.append(
                 self.__serialize_nquad(
                     (
@@ -642,7 +656,12 @@ class RDNA:
         * @return the N-Quad string.
         """
 
-        s, p, o, g = quad
+        # Model the triples of a context-unaware Graph as quads in a Dataset default graph
+        if len(quad) == 3:
+            s, p, o = quad
+            g = DATASET_DEFAULT_GRAPH_ID
+        else:
+            s, p, o, g = quad
 
         # subject can only be NamedNode or BlankNode
         nquad = s.n3() if isinstance(s, (URIRef, BNode)) else s
